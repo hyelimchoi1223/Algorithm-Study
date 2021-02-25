@@ -4,10 +4,15 @@ for _ in range(3):
     word += input()
 my_tuple = []
 firstchar = word[0]
-charCnt = 0
-for i in range(0, word.__len__()+1):
-    if firstchar == _:
-        charCnt += 1
-    else:
+charCnt = 1
+
+index = 0
+for i in word:
+    print("1."+i)
+    index += 1
+    for j in word[index::]:
+        print(j)
         
+        
+    
             
