@@ -1,7 +1,8 @@
 def isMinority(value):
-    result = [_ for _ in range(1, value+1) if value % _ == 0]
-    result.remove(1)
-    result.remove(value)
+    if value == 1:
+        return True
+    result = [_ for _ in range(2, value) if value % _ == 0]
+    print(value, result)
     return True if result.__len__() == 0 else False
     
 M = int(input())
