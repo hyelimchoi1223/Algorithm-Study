@@ -1,47 +1,38 @@
 import numpy as np
 basket = []
-global_board = []
+global_board = np.array([])
 
 
-def moves_doll(board, move):
+def moves_doll(move):
     global global_board
     global basket
-    for idx, pick in enumerate(global_board[move-1]):
-        if pick == 0:
+
+    for idx, item in enumerate(global_board[:, move-1]):
+        if item == 0:
             continue
-        value = global_board[move-1].pop(idx)
-        basket.append(value)
+        basket.append(item)
+        global_board[idx, move-1] = 0
         break
 
 
 def destory_doll():
     global basket
     if len(basket) < 2:
-        return False
+        return 0
 
     if basket[-1] == basket[-2]:
         basket.pop(-1)
         basket.pop(-1)
-        return True
-    return False
+        return 2
+    return 0
 
 
 def solution(board, moves):
     global global_board
-    global_board = np.array(board).T.tolist()
+    global_board = np.array(board)
 
     answer = 0
     for m in moves:
-        moves_doll(board, m)
-        print(f'before {basket}')
-        if destory_doll() == True:
-            answer += 1
-            print(f'after {basket}')
+        moves_doll(m)
+        answer += destory_doll()
     return answer
-
-
-board = [[0, 0, 0, 0, 0], [0, 0, 1, 0, 3], [
-    0, 2, 5, 0, 1], [4, 2, 4, 4, 2], [3, 5, 1, 3, 1]]
-moves = [1, 5, 3, 5, 1, 2, 1, 4]
-
-print(solution(board, moves))
