@@ -5,6 +5,3 @@ def solution(numbers):
         if n not in numbers:
             answer += n
     return answer
-
-
-solution([1, 2, 3, 4, 6, 7, 8, 0])
